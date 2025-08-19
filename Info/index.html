@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap">
+    <style>
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background-color: #ffb997;
+            font-size: 20px;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 100%;
+            overflow-y: auto;
+            height: 600px; 
+        }
+        .trigger {
+            position: absolute; 
+            top: 30px; 
+            left: 90%; 
+            transform: translateX(-75%); 
+            padding: 20px 30px;
+            background-color: transparent;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .popup {
+            position: absolute; 
+            left: 70%; 
+            transform: translateX(-30%);
+            display: none; 
+            z-index: 999;
+            background-color: transparent;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .trigger:hover + .popup {
+            display: block;
+        }
+        .popup img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 10px;
+            padding: 10px;
+        }
+        .image-gallery img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        footer {
+            text-align: center;
+        }
+  
+        footer p {
+            font-size: 10px; 
+            color: #843b62;
+        }
+        p1{
+            color: black;
+            font-size: 15px;
+        }
+
+        a{
+            font-size: 15px;
+            text-decoration: none;
+            color: black;
+            
+        }
+
+        a:hover {
+            color: black; /* Change to the desired color */
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>About UAVS Reveria</h1>
+    <div class="quiz-container">
+        <div class="start-page" id="start-page">
+            <div class="container">
+                <div class="image-gallery">
+                    <p1>Instrumental. You like quiet focus and clean structure. Instrumental gives your mind room to plan and solve. <a href="kkkk.html" target="_blank">accelerate.</a></p1>
+                    <img src="../images/Instrumental - INTJ.png" alt="Instrumental">
+                    <br>
+                    <p1>Jazz. You chase complexity and surprise. Jazz rewards your curiosity and playful logic.</p1>
+                    <img src="../images/Jazz - INTP.png" alt="Jazz">
+                    <br>
+                    <p1>Rock. You lead and push forward. Rock fuels your drive and bold presence.</p1>
+                    <img src="../images/Rock - ENTJ.png" alt="Rock">
+                    <br>
+                    <p1>Punk. You love testing rules and sparking debate. Punk matches your restless, creative mischief..</p1>
+                    <img src="../images/Punk - ENTP.png" alt="Punk">
+                    <br>
+                    <p1>Indie. You seek meaning and authenticity. Indie mirrors your private depth and empathy.</p1>
+                    <img src="../images/Indie - INFJ.png" alt="Indie">
+                    <br>
+                    <p1>Folk. You feel deeply and value story. Folk reflects your gentle ideals and heart.</p1>
+                    <img src="../images/Folk - INFP.png" alt="Folk">
+                    <br>
+                    <p1>Pop. You unite people and boost morale. Pop amplifies your warmth and group energy. <a href="../Old/" target="_blank">look up</a> the rotation curve, it's pretty cool.)</p1>
+                    <img src="../images/Pop - ENFJ.png" alt="Pop">
+                    <br>
+                    <p1>Hip-Hop. You crave expression and spontaneity. Hip-hop fits your playful voice and hype.</p1>
+                    <img src="../images/Hip Hop - ENFP.png" alt="Hip Hop">
+                    <br>
+                    <p1>Classic Rock. You respect tradition and reliability. Classic rock offers sturdy anthems you trust.</p1>
+                    <img src="../images/Classic Rock - ISTJ.png" alt="Classic Rock">
+                    <br>
+                    <p1>Classical. You protect and comfort others. Classical supplies calm order and graceful beauty.</p1>
+                    <img src="../images/Classical - ISFJ.png" alt="Classical">
+                    <br>
+                    <p1>Motivation. You set goals and expect results. Motivational tracks push your focus and momentum.</p1>
+                    <img src="../images/Motivation - ESTJ.png" alt="Motivation">
+                    <br>
+                    <p1>Country. You build community and share care. Country suits your friendly storytelling and warmth.</p1>
+                    <img src="../images/Country - ESFJ.png" alt="Country">
+                    <br>
+                    <p1>Electronic. You tinker and prefer hands-on fixes. Electronic thrills your experimental, gadget-driven side.</p1>
+                    <img src="../images/Electronic - ISTP.png" alt="Electronic">
+                    <br>
+                    <p1>Blues. You create beauty from feeling. Blues matches your soulful, subtle expression.</p1>
+                    <img src="../images/Blues - ISFP.png" alt="Blues">
+                    <br>
+                    <p1>Rap. You act fast and seize moments. Rap pairs with your bold energy and swagger.</p1>
+                    <img src="../images/Rap - ESTP.png" alt="Rap">
+                    <br>
+                    <p1>Dance. You live loud and present. Dance puts your joy and spotlight front and center.</p1>
+                    <img src="../images/Dance - ESFP.png" alt="Dance">
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="https://docs.google.com/document/d/1GKvwQOTK8jjRFDShpuLD_w9_VGU_IVxfSglJngvNWLU/edit?usp=sharing" target="_blank" style="font-size: 10px; text-decoration: none;">&copy; 2024-2025 I-see Warisa Jaidee</a>
+    </footer>
+    </div>
+</body>
+</html>
