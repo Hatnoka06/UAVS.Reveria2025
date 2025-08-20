@@ -347,51 +347,6 @@ function showResult() {
     document.getElementById('restart-button').style.display = 'block'; // Show the restart button
 }
 
-// Download result image function
-function downloadResultImage() {
-    const resultImage = document.getElementById('result-image');
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    
-    if (resultImage.complete) {
-        processDownload();
-    } else {
-        resultImage.onload = processDownload;
-    }
-    
-    function processDownload() {
-        canvas.width = resultImage.naturalWidth || resultImage.width;
-        canvas.height = resultImage.naturalHeight || resultImage.height;
-        
-        ctx.drawImage(resultImage, 0, 0);
-        
-        canvas.toBlob(function(blob) {
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            
-            const personalityType = resultImage.alt.replace(' Image', '') || 'PersonalityResult';
-            const timestamp = new Date().toISOString().slice(0,10);
-            link.download = `${personalityType}_${timestamp}.png`;
-            
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }, 'image/png');
-    }
-}
-
-// Add event listener for download button
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        const downloadBtn = document.getElementById('download-result');
-        if (downloadBtn) {
-            downloadBtn.addEventListener('click', downloadResultImage);
-        }
-    }, 100);
-});
-
 //Function to restart the quiz
 function restartQuiz() {
     currentQuestion = 0;
@@ -400,6 +355,84 @@ function restartQuiz() {
     document.getElementById('quiz').style.display = 'block';
     displayQuestion(); // Start the quiz from the beginning
 }
+
+// Setup download button - called after result is shown
+function setupDownloadButton() {
+    const downloadBtn = document.getElementById('download-result');
+    if (downloadBtn) {
+        downloadBtn.replaceWith(downloadBtn.cloneNode(true));
+        const newDownloadBtn = document.getElementById('download-result');
+        
+        newDownloadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            downloadResultImage();
+        });
+    }
+}
+
+// Add this line to your showResult() function at the end:
+setupDownloadButton();
+
+// Download function with fallback
+function downloadResultImage() {
+    const resultImage = document.getElementById('result-image');
+    
+    if (!resultImage || !resultImage.src) {
+        alert('No result image available to download!');
+        return;
+    }
+    
+    // Try canvas method first
+    if (resultImage.complete) {
+        tryCanvasDownload();
+    } else {
+        resultImage.onload = tryCanvasDownload;
+    }
+    
+    function tryCanvasDownload() {
+        try {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = resultImage.naturalWidth || 360;
+            canvas.height = resultImage.naturalHeight || 300;
+            
+            ctx.drawImage(resultImage, 0, 0);
+            
+            canvas.toBlob(function(blob) {
+                if (blob) {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    
+                    const personalityType = resultImage.alt.replace(' Image', '') || 'PersonalityResult';
+                    const timestamp = new Date().toISOString().slice(0,10);
+                    link.download = `UAVS_${personalityType}_${timestamp}.png`;
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                } else {
+                    fallbackDownload();
+                }
+            }, 'image/png');
+            
+        } catch (error) {
+            fallbackDownload();
+        }
+    }
+    
+    function fallbackDownload() {
+        const link = document.createElement('a');
+        link.href = resultImage.src;
+        const personalityType = resultImage.alt.replace(' Image', '') || 'PersonalityResult';
+        const timestamp = new Date().toISOString().slice(0,10);
+        link.download = `UAVS_${personalityType}_${timestamp}.png`;
+        link.click();
+    }
+}
+
 
 document.getElementById('restart-button').addEventListener('click', restartQuiz);
 
