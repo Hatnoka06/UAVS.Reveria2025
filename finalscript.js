@@ -347,7 +347,50 @@ function showResult() {
     document.getElementById('restart-button').style.display = 'block'; // Show the restart button
 }
 
+// Download result image function
+function downloadResultImage() {
+    const resultImage = document.getElementById('result-image');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    if (resultImage.complete) {
+        processDownload();
+    } else {
+        resultImage.onload = processDownload;
+    }
+    
+    function processDownload() {
+        canvas.width = resultImage.naturalWidth || resultImage.width;
+        canvas.height = resultImage.naturalHeight || resultImage.height;
+        
+        ctx.drawImage(resultImage, 0, 0);
+        
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            
+            const personalityType = resultImage.alt.replace(' Image', '') || 'PersonalityResult';
+            const timestamp = new Date().toISOString().slice(0,10);
+            link.download = `${personalityType}_${timestamp}.png`;
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }, 'image/png');
+    }
+}
 
+// Add event listener for download button
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        const downloadBtn = document.getElementById('download-result');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', downloadResultImage);
+        }
+    }, 100);
+});
 
 //Function to restart the quiz
 function restartQuiz() {
